@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <head>
+        <title>Página Inicio</title>
+    </head>
+    <body>
+   		<h1>Pagina Inicio</h1>
+   		<p>Pulsa  <a th:href="@{/webpublico}">aqui</a> para ver una pagina publica.</p>
+   		<p>Si eres un usuario normal pulsa <a th:href="@{/webprivado}">aqui</a>  para ver una pagina privada</p>
+   		<p>Si eres un administrador normal pulsa <a th:href="@{/webadmin}">aqui</a>  para ver la pagina del administrador</p>   		
+   		<div sec:authorize="isAuthenticated()">
+			Hello <span sec:authentication="name">someone</span>
+			<p><a th:href="@{/logout}">Desconectar</a></p>
+		</div>
+   		
+    </body>
+</html>

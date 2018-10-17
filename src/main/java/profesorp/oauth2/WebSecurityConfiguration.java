@@ -42,25 +42,23 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new  BCryptPasswordEncoder();
     }
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/webjars/**");
-
-    }
+   
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+        	.csrf().disable()
             .authorizeRequests()
-            	.antMatchers("/webpublico").permitAll()
-                .anyRequest().authenticated().and()
+            	.antMatchers("/","/index","/webpublico").permitAll()
+            	.antMatchers("/webprivado").authenticated()
+            	.antMatchers("/webadmin").hasRole("ADMIN").and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .and()
-            .logout()
+                .logout() // Metodo get pues he desabilitado CSRF
                 .permitAll();
     }
 
